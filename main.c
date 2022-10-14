@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/13 21:02:43 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/14 17:47:40 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ void	one_arg(char **tab, char *arg)
 	sign = 0;
 	while (arg[++i])
 	{
-		if (arg[i] == '-' || arg[i] == '+')
-		{
-
-		}
 		if (!ft_isdigit(arg[i]) && arg[i] != ' ')
 			exit (error() + printf("%c%c a %d", arg[i - 1], arg[i], i));
 	}
