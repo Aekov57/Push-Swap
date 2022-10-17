@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/17 01:20:57 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:44:25 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,23 @@ void	check_int_limit(char **tab, int i, int check)
 	}
 }
 
+void	arg_parsing(char *str, int i)
+{
+	if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '+'
+		&& str[i] != '-')
+		exit (error());
+	if ((str[i] == '+' || str[i] == '-')
+		&& (!ft_isdigit(str[i + 1]) || ft_isdigit(str[i - 1])))
+		exit (error());
+}
+
 void	one_arg(char **tab, char *arg)
 {
 	int	i;
 
-	int	sign;
-
 	i = -1;
-	sign = 0;
 	while (arg[++i])
-	{
-		if (!ft_isdigit(arg[i]) && arg[i] != ' ' && arg[i] != '+'
-			&& arg[i] != '-')
-			exit (error() + printf("%c%c a %d", arg[i - 1], arg[i], i));
-		if ((arg[i] == '+' || arg[i] == '-') && !ft_isdigit(arg[i + 1]))
-			exit (error());
-	}
+		arg_parsing(arg, i);
 	tab = ft_split(arg, ' ');
 	i = 0;
 	while (tab[i])
@@ -76,15 +77,9 @@ void	mulltiple_arg(char **tab, int ac)
 		i2 = 0;
 		while (tab[i][i2])
 		{
-			if (!ft_isdigit(tab[i][i2]) && tab[i][i2] != '+'
-				&& tab[i][i2] != '-')
-				exit(error());
-			if ((tab[i][i2] == '+' || tab[i][i2] == '-')
-				&& !ft_isdigit(tab[i][i2 + 1]))
-				exit(error());
-			i2++;
-			check_int_limit(tab, i, 0);
+			arg_parsing(tab[i], i2++);
 		}
+		check_int_limit(tab, i, 0);
 		printf("%s\n", tab[i]);
 	}
 }
