@@ -5,57 +5,65 @@
 #                                                     +:+ +:+         +:+      #
 #    By: misimon <misimon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/04 14:31:22 by misimon           #+#    #+#              #
-#    Updated: 2022/10/13 20:29:00 by misimon          ###   ########.fr        #
+#    Created: 2022/10/19 00:55:09 by misimon           #+#    #+#              #
+#    Updated: 2022/10/19 21:21:00 by misimon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-CC = gcc
-CFLAG = -Wall -Werror -Wextra -g3
-DANGER = -fsanitize=address
-LIBS = -Llibft -lft
+#	NAME :
+NAME	:= 	push_swap
+#	FILE :
+SRC_DIR	:= 	src
 
-# **************************************************************************** #
-#                                    FILES                                     #
-# **************************************************************************** #
+SRCS	:=	main.c				\
 
-MAIN_SRC = main\
+SRCS := 	$(SRCS:%=$(SRC_DIR)/%)
 
-ALL_SRC += $(addsuffix .c, $(MAIN_SRC))
+#	COMPILATION:
+CC := 		@gcc
+CFLAGS := 	-Wall -Werror -Wextra
+LIBS :=		-Llibft -lft
+DANGER := -fsanitize=address
 
-# **************************************************************************** #
+#	STATIC LIB CREATION:
+AR :=		@ar
+ARFLAG :=	-rcs
 
-SRC = return_fct \
+#	BUILD:
+OBJS_DIR := .build
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
+LIBFILE := libft
 
-ALL_SRC += $(addprefix src/, $(addsuffix .c, $(SRC)))
+#	TOOLS:
 
-OBJS = $(ALL_SRC:.c=.o)
+RM	:= @rm -rf
+DUP_DIR = @mkdir -p $(@D)
+CREATE_DIR = [ ! -d $(OBJS_DIR) ] && mkdir $(OBJS_DIR)
+ALLOBJS = $(OBJS_DIR)/%.o
 
-# **************************************************************************** #
-#                                    COMMAND                                   #
-# **************************************************************************** #
+#	COMMAND:
 
 all : $(NAME)
 
-.c.o :
-	@$(CC) $(CFLAG) -o $@ -c $<
+.create.build :
+	$(CREATE_DIR)
+	$(CLONE_LIB)
+
+$(OBJS_DIR)/%.o : $(SRC_DIR)/%.c
+	@make -sC libft
+	$(DUP_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "\033[1A\033[0J\033[32;1m\rPush-Swap compilation >>\033[0m\033[30;1m $@\033[0m"
 
 $(NAME) : $(OBJS)
-		@make -sC libft
-		@$(CC) -o $(NAME) $(OBJS) $(LIBS)
-
-norm :
-		@make norm -sC libft
-		@norminette
-		@norminette src/*
+	$(CC) -o $(NAME) $(OBJS) $(LIBS)
 
 clean :
-		@make clean -sC libft
-		@rm -f $(OBJS)
+	@make clean -sC libft
+	$(RM) $(OBJS_DIR)
 
 fclean : clean
 	@make fclean -sC libft
-	@rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all

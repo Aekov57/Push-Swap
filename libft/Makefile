@@ -5,113 +5,111 @@
 #                                                     +:+ +:+         +:+      #
 #    By: misimon <misimon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/01 18:29:09 by misimon           #+#    #+#              #
-#    Updated: 2022/06/28 15:11:11 by misimon          ###   ########.fr        #
+#    Created: 2022/10/19 00:55:09 by misimon           #+#    #+#              #
+#    Updated: 2022/10/19 19:07:56 by misimon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-CC = @gcc
-CFLAGS = -Wall -Werror -Wextra
+#	NAME :
+NAME	:= 	libft.a
 
-# ============================================================================ #
-# ==============================|	FILES	|================================= #
-# ============================================================================ #
+#	FILE :
+SRC_DIR	:= 	src
 
-CHECK_SRC =	ft_isalpha\
-			ft_isdigit\
-			ft_isprint\
-			ft_isascii\
-			ft_isalnum\
+SRCS	:=	ft_is_fct/ft_isalpha.c		\
+			ft_is_fct/ft_isdigit.c		\
+			ft_is_fct/ft_isprint.c		\
+			ft_is_fct/ft_isascii.c		\
+			ft_is_fct/ft_isalnum.c		\
+										\
+			ft_printf/ft_printf_hex.c	\
+			ft_printf/ft_printf_other.c	\
+			ft_printf/ft_printf_ptr.c	\
+			ft_printf/ft_printf_uint.c	\
+			ft_printf/ft_printf.c		\
+										\
+			ft_str_fct/ft_strjoin.c		\
+			ft_str_fct/ft_strfjoin.c	\
+			ft_str_fct/ft_strchr.c		\
+			ft_str_fct/ft_strdup.c		\
+			ft_str_fct/ft_strlcat.c		\
+			ft_str_fct/ft_strlcpy.c		\
+			ft_str_fct/ft_strlen.c		\
+			ft_str_fct/ft_strrchr.c		\
+			ft_str_fct/ft_strncmp.c		\
+			ft_str_fct/ft_strnstr.c		\
+			ft_str_fct/ft_substr.c		\
+			ft_str_fct/ft_strtrim.c		\
+			ft_str_fct/ft_strmapi.c		\
+			ft_str_fct/ft_striteri.c	\
+			ft_str_fct/ft_strcmp.c		\
+										\
+			getnextline/get_next_line.c	\
+										\
+			ft_put_fct/ft_putchar_fd.c	\
+			ft_put_fct/ft_putstr_fd.c	\
+			ft_put_fct/ft_putnbr_fd.c	\
+			ft_put_fct/ft_putendl_fd.c	\
+										\
+			ft_convert_fct/ft_atoi.c	\
+			ft_convert_fct/ft_bzero.c	\
+			ft_convert_fct/ft_itoa.c	\
+			ft_convert_fct/ft_split.c	\
+			ft_convert_fct/ft_tolower.c	\
+			ft_convert_fct/ft_toupper.c	\
+										\
+			ft_mem_fct/ft_memmove.c		\
+			ft_mem_fct/ft_memcpy.c		\
+			ft_mem_fct/ft_memset.c		\
+			ft_mem_fct/ft_memcmp.c		\
+			ft_mem_fct/ft_memccpy.c		\
+			ft_mem_fct/ft_memchr.c		\
+			ft_mem_fct/ft_calloc.c		\
+										\
+			ft_end_fct/ft_error.c		\
+										\
+			ft_free_fct/ft_tabfree.c	\
 
-ALL_SRC += $(addprefix CheckFunction/, $(addsuffix .c, $(CHECK_SRC)))
+SRCS := 	$(SRCS:%=$(SRC_DIR)/%)
 
-# ============================================================================ #
+#	COMPILATION:
+CC := 		@gcc
+CFLAGS := 	-Wall -Werror -Wextra
 
-CONVERT_SRC =	ft_atoi\
-				ft_bzero\
-				ft_itoa\
-				ft_split\
-				ft_tolower\
-				ft_toupper\
+#	STATIC LIB CREATION:
+AR :=		@ar
+ARFLAG :=	-rcs
 
-ALL_SRC += $(addprefix ConvertFunction/, $(addsuffix .c, $(CONVERT_SRC)))
+#	BUILD:
+OBJS_DIR := .build
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
 
-# ============================================================================ #
+#	TOOLS:
 
-MEM_SRC =	ft_memmove\
-			ft_memcpy\
-			ft_memset\
-			ft_memcmp\
-			ft_memccpy\
-			ft_memchr\
-			ft_calloc\
+RM	:= @rm -rf
+DUP_DIR = @mkdir -p $(@D)
+CREATE_DIR = [ ! -d $(OBJS_DIR) ] && mkdir $(OBJS_DIR)
+ALLOBJS = $(OBJS_DIR)/%.o
 
-ALL_SRC += $(addprefix MemFunction/, $(addsuffix .c, $(MEM_SRC)))
-
-# ============================================================================ #
-
-PUT_SRC =	ft_putchar_fd\
-			ft_putstr_fd\
-			ft_putnbr_fd\
-			ft_putendl_fd\
-
-ALL_SRC += $(addprefix PutFunction/, $(addsuffix .c, $(PUT_SRC)))
-
-# ============================================================================ #
-
-STR_SRC =	ft_strchr\
-			ft_strlcat\
-			ft_strlcpy\
-			ft_strlen\
-			ft_strrchr\
-			ft_strncmp\
-			ft_strnstr\
-			ft_strdup\
-			ft_substr\
-			ft_strtrim\
-			ft_strjoin\
-			ft_strmapi\
-			ft_striteri\
-
-ALL_SRC += $(addprefix StrFunction/, $(addsuffix .c, $(STR_SRC)))
-
-# ============================================================================ #
-
-PRINTF_SRC = ft_printf_hex\
-			 ft_printf_other\
-			 ft_printf_ptr\
-			 ft_printf_uint\
-			 ft_printf
-
-ALL_SRC += $(addprefix Ft_Printf/, $(addsuffix .c, $(PRINTF_SRC)))
-
-# ============================================================================ #
-
-GNL_SRC = get_next_line_utils\
-		  get_next_line\
-
-ALL_SRC += $(addprefix GetNextLine/, $(addsuffix .c, $(GNL_SRC)))
-
-OBJS = $(ALL_SRC:.c=.o)
-
-# ============================================================================ #
-# ==============================|	 CMD	|================================= #
-# ============================================================================ #
+#	COMMAND:
 
 all : $(NAME)
 
+.create.build :
+	$(CREATE_DIR)
+
 $(NAME) : $(OBJS)
-	@ar rc $(NAME) $(OBJS)
+	$(AR) $(ARFLAG) $(NAME) $(OBJS)
 
-
-norm :
-	@norminette
+$(OBJS_DIR)/%.o : $(SRC_DIR)/%.c
+	$(DUP_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "\033[1A\033[0J\033[32;1m\rLibft compilation >>\033[0m\033[30;1m $@\033[0m"
 
 clean :
-	@rm -f $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 fclean : clean
-	@rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
