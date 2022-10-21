@@ -6,7 +6,7 @@
 #    By: misimon <misimon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 00:55:09 by misimon           #+#    #+#              #
-#    Updated: 2022/10/19 21:21:00 by misimon          ###   ########.fr        #
+#    Updated: 2022/10/21 16:26:06 by misimon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(OBJS_DIR)/%.o : $(SRC_DIR)/%.c
 	@echo "\033[1A\033[0J\033[32;1m\rPush-Swap compilation >>\033[0m\033[30;1m $@\033[0m"
 
 $(NAME) : $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LIBS)
+	$(CC) -o $(NAME) $(OBJS) $(LIBS) -g
 
 clean :
 	@make clean -sC libft

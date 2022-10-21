@@ -6,7 +6,7 @@
 #    By: misimon <misimon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 00:55:09 by misimon           #+#    #+#              #
-#    Updated: 2022/10/19 19:07:56 by misimon          ###   ########.fr        #
+#    Updated: 2022/10/21 16:38:44 by misimon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	:=	ft_is_fct/ft_isalpha.c		\
 			ft_is_fct/ft_isprint.c		\
 			ft_is_fct/ft_isascii.c		\
 			ft_is_fct/ft_isalnum.c		\
+			ft_is_fct/ft_issign.c		\
 										\
 			ft_printf/ft_printf_hex.c	\
 			ft_printf/ft_printf_other.c	\
@@ -103,7 +104,7 @@ $(NAME) : $(OBJS)
 
 $(OBJS_DIR)/%.o : $(SRC_DIR)/%.c
 	$(DUP_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< -g
 	@echo "\033[1A\033[0J\033[32;1m\rLibft compilation >>\033[0m\033[30;1m $@\033[0m"
 
 clean :
