@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:31:25 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/21 17:32:34 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/21 21:13:10 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,20 @@ void	one_arg(char **tab, char *arg, int check)
 	i = -1;
 	while (tab[++i])
 		check_int(tab, i, -1);
-	free_tab(tab);
 }
 
-char *mult_in_one(char **arg, int ac)
+char	*mult_in_one(char **arg, int ac)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = calloc(1, sizeof(char));
-		while (++i < ac)
-		{
-				str = ft_strfjoin(str, arg[i]);
-			if (i + 1 != ac)
-				str = ft_strfjoin(str, " ");
+	while (++i < ac)
+	{
+		str = ft_strfjoin(str, arg[i]);
+		if (i + 1 != ac)
+			str = ft_strfjoin(str, " ");
 	}
 	return (str);
-}
-
-void	check_arg(t_list a, char **arg, int ac)
-{
-	char	**tab;
-
-	(void)a;
-	tab = NULL;
-	if (ac < 2)
-		exit(1);
-	one_arg(tab, mult_in_one(arg, ac), 1);
 }
