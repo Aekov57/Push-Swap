@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/21 21:28:53 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:15:28 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,40 @@ long	ft_atol(const char *str)
 	return (result);
 }
 
+void	insert_arg(t_list *a, char **tab)
+{
+	int		i;
+	long	nbr;
+
+	i = -1;
+	while (tab[++i])
+	{
+		nbr = ft_atol(tab[i]);
+		a = add_tail_int(a, nbr);
+	}
+}
+
 void	check_arg(t_list *a, char **arg, int ac)
 {
 	char	**tab;
+	int		i;
 
-	(void)a;
+	i = 0;
 	tab = NULL;
 	if (ac < 2)
 		exit(1);
-	one_arg(tab, mult_in_one(arg, ac), 1);
+	tab = one_arg(tab, mult_in_one(arg, ac), 1);
+	insert_arg(a, tab);
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*a;
-	t_list	b;
 
-	b.nbr = 0;
-	a = NULL;
+	a = create_list();
 	check_arg(a, av, ac);
+	//a = insert_node_int(a, 2, 80);
+	view_lst(a);
+	reverse_lst_view(a);
 	return (1);
 }
-
-// TODO: Vérifier si les arg sont stocker dans 1 seul argv ou dans plusieurs !
-// TODO: Mettre les arg une fois convertis dans la liste chainé A !

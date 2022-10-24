@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:31:25 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/21 21:13:10 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:18:46 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	arg_parsing(char *str, int i)
 	return (1);
 }
 
-void	one_arg(char **tab, char *arg, int check)
+char	**one_arg(char **tab, char *arg, int check)
 {
 	int	i;
 
@@ -49,6 +49,7 @@ void	one_arg(char **tab, char *arg, int check)
 	i = -1;
 	while (tab[++i])
 		check_int(tab, i, -1);
+	return (tab);
 }
 
 char	*mult_in_one(char **arg, int ac)
