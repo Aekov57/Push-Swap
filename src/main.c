@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/24 18:15:28 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/26 15:55:34 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ void	check_arg(t_list *a, char **arg, int ac)
 		exit(1);
 	tab = one_arg(tab, mult_in_one(arg, ac), 1);
 	insert_arg(a, tab);
+	free_tab(tab);
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*a;
+	t_list	*b;
 
+	b = create_list();
 	a = create_list();
 	check_arg(a, av, ac);
-	//a = insert_node_int(a, 2, 80);
-	view_lst(a);
-	reverse_lst_view(a);
+	free(a);
+	free(b);
 	return (1);
 }

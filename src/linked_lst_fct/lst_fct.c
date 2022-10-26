@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:38:08 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/24 18:13:51 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/26 15:32:00 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,66 @@ t_list	*insert_node_int(t_list *ptr, size_t position, long data)
 	return (ptr);
 }
 
+t_list	*delete_position(t_list *ptr, size_t position)
+{
+	t_node	*node;
+	size_t	i;
+
+	if (!ptr)
+		return (NULL);
+	node = ptr->head	;
+	i = 0;
+	while (node && ++i <= position)
+	{
+		if (position == i)
+		{
+			if (node->next == NULL)
+			{
+				ptr->tail = node->prev;
+				ptr->tail->next = NULL;
+			}
+			if (node->prev == NULL)
+			{
+				ptr->head = node->next;
+				ptr->head->prev = NULL;
+			}
+			else
+			{
+				node->next->prev = node->prev;
+				node->prev->next = node->next;
+			}
+			free(node);
+			ptr->size--;
+		}
+		else
+		{
+			node = node->next;
+		}
+	}
+	return (ptr);
+}
+
+void	delete_all_list(t_list *ptr)
+{
+	t_node	*node;
+
+	while (ptr && ptr->size-- != 0)
+	{
+		node = ptr->head->next;
+		free(ptr->head);
+		ptr->head = node;
+	}
+	ptr->head = NULL;
+	ptr->tail = NULL;
+	ptr->size = 0;
+}
+
 void	view_lst(t_list *lst)
 {
 	t_node	*temp_node;
 
+	if (!lst->head)
+		exit (0 + printf("NULL"));
 	temp_node = lst->head;
 	while (temp_node != NULL)
 	{
@@ -136,6 +192,8 @@ void	reverse_lst_view(t_list *lst)
 {
 	t_node	*temp_node;
 
+	if (!lst->tail)
+		exit (0 + printf("NULL"));
 	temp_node = lst->tail;
 	printf("NULL");
 	while (temp_node != NULL)
