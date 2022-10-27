@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:38:08 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/26 15:32:00 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/27 21:32:24 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,59 +25,62 @@ t_list	*create_list(void)
 	return (ptr);
 }
 
-t_list	*add_tail_int(t_list *ptr, long data)
+void	add_tail_int(t_list *ptr, long data)
 {
 	t_node	*new_node;
 
-	if (!ptr)
-		return (NULL);
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	new_node->nbr = data;
+	new_node->prev = ptr->tail;
 	new_node->next = NULL;
-	if (ptr->tail == NULL)
-	{
-		new_node->prev = NULL;
-		ptr->head = new_node;
-		ptr->tail = new_node;
-	}
-	else
-	{
+	if (ptr->tail)
 		ptr->tail->next = new_node;
-		new_node->prev = ptr->tail;
-		ptr->tail = new_node;
-	}
+	else
+		ptr->head = new_node;
+	ptr->tail = new_node;
 	ptr->size++;
-	return (ptr);
 }
 
-t_list	*add_head_int(t_list *ptr, long data)
+void	add_head_int(t_list *ptr, long data)
 {
 	t_node	*new_node;
 
-	if (!ptr)
-		return (NULL);
 	new_node = malloc(sizeof(t_node));
 	if (!new_node)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	new_node->nbr = data;
 	new_node->prev = NULL;
-	if (ptr->head == NULL)
-	{
-		new_node->next = NULL;
-		ptr->head = new_node;
-		ptr->tail = new_node;
-	}
-	else
-	{
+	new_node->next = ptr->head;
+	if (ptr->head)
 		ptr->head->prev = new_node;
-		new_node->next = ptr->head;
-		ptr->head = new_node;
-	}
+	else
+		ptr->tail = new_node;
+	ptr->head = new_node;
 	ptr->size++;
-	return (ptr);
 }
+
+void	delete_last(t_list *ptr)
+{
+	t_node	*node;
+
+	node = ptr->tail;
+	if (!node)
+		exit (EXIT_FAILURE);
+	ptr->tail = node->prev;
+	if (ptr->tail)
+		ptr->tail->next = NULL;
+	else
+		ptr->head = NULL;
+	free(node);
+	ptr->size--;
+}
+
+//int delete_first()
+//{
+
+//}
 
 void	insert_node_algo(t_node *node, t_node *new_node, t_list *ptr, int data)
 {
@@ -126,7 +129,7 @@ t_list	*delete_position(t_list *ptr, size_t position)
 
 	if (!ptr)
 		return (NULL);
-	node = ptr->head	;
+	node = ptr->head;
 	i = 0;
 	while (node && ++i <= position)
 	{
@@ -186,6 +189,21 @@ void	view_lst(t_list *lst)
 		temp_node = temp_node->next;
 	}
 	printf("NULL\n");
+}
+
+int	lst_len(t_list *lst)
+{
+	int		i;
+	t_node	*node;
+
+	node = lst->head;
+	i = 0;
+	while (node)
+	{
+		i++;
+		node = node->next;
+	}
+	return (i);
 }
 
 void	reverse_lst_view(t_list *lst)
