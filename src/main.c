@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/28 16:24:45 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/31 16:50:43 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,25 @@ void	insert_arg(t_list *a, char **tab)
 	}
 }
 
+int	check_high(t_list *a)
+{
+	t_node	*node;
+	int		max;
+	int		i;
+
+	i = 0;
+	node = a->head;
+	max = node->nbr;
+	while (node && node->next != NULL)
+	{
+		if (node->nbr > node->next->nbr)
+			max = node->nbr;
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
+
 void	check_arg(t_list *a, char **arg, int ac)
 {
 	char	**tab;
@@ -60,19 +79,61 @@ void	check_arg(t_list *a, char **arg, int ac)
 	free_tab(tab);
 }
 
+
+int	check_min(t_list *a)
+{
+	t_node	*node;
+	int		min;
+	int		i;
+
+	i = 0;
+	node = a->head;
+	min = node->nbr;
+	while (node && node->next != NULL)
+	{
+		if (node->nbr < node->next->nbr)
+			min = node->nbr;
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
+
+int	check_sort(t_list *a)
+{
+	t_node	*node;
+
+	node = a->head;
+	while (node && node->next != NULL)
+	{
+		if (node->nbr > node->next->nbr)
+			return (0);
+		node = node->next;
+	}
+	return (1);
+}
+
 void	sort_five(t_list *a, t_list *b)
 {
-	b = lst_push(b, a);
-	printf("pa\n");
-	b = lst_push(b, a);
-	printf("pa\n");
-	sort_three(a);
-	a = lst_push(a, b);
-	printf("pb\n");
-	a = lst_rotate(a);
-	printf("ra\n");
-	a = lst_push(a, b);
-	printf("pb\n");
+	int i;
+
+	i = check_sort(a);
+	while (i == 0)
+	{
+		b = lst_push(b, a);
+		b = lst_push(b, a);
+		view_lst(a);
+		view_lst(b);
+		printf("pb\npb\n");
+		a = sort_three(a);
+		a = lst_push(a, b);
+		a = lst_push(a, b);
+		printf("pb\npb\n");
+		a = lst_rotate(a);
+		printf("ra\n");
+		i = check_sort(a);
+	}
+	view_lst(a);
 }
 
 int	main(int ac, char **av)
