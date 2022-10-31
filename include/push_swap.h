@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:11:06 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/27 21:31:36 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:10:43 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ t_list	*create_list(void);
 void	add_head_int(t_list *ptr, long data);
 void	add_tail_int(t_list *ptr, long data);
 void	delete_last(t_list *ptr);
+void	delete_first(t_list *ptr);
 t_list	*insert_node_int(t_list *ptr, size_t position, long data);
 t_list	*delete_position(t_list *ptr, size_t position);
 t_list	*lst_swap(t_list *ptr);
 t_list	*lst_rotate(t_list *ptr);
 t_list	*lst_push(t_list *lst, t_list *push);
 t_list	*reverse_rotate(t_list *ptr);
+t_list	*sort_three(t_list *a);
 int		lst_len(t_list *lst);
 void	double_revrotate(t_list *a, t_list *b);
 void	double_rotate(t_list *a, t_list *b);

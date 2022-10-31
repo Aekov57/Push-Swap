@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/27 21:50:45 by misimon          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:24:45 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,48 +51,28 @@ void	check_arg(t_list *a, char **arg, int ac)
 	i = 0;
 	tab = NULL;
 	if (ac < 2)
+	{
+		free(a);
 		exit(1);
+	}
 	tab = one_arg(tab, mult_in_one(arg, ac), 1);
 	insert_arg(a, tab);
 	free_tab(tab);
 }
 
-t_list	*sort_three(t_list *a)
+void	sort_five(t_list *a, t_list *b)
 {
-	if (a->head->nbr > a->head->next->nbr && a->head->nbr < a->tail->nbr)
-	{
-		a = lst_swap(a);
-		printf("sa\n");
-	}
-	else if (a->head->nbr > a->tail->nbr && a->head->nbr > a->head->next->nbr
-		&& a->head->next->nbr > a->tail->nbr)
-	{
-		a = lst_swap(a);
-		printf("sa\n");
-		a = reverse_rotate(a);
-		printf("rra\n");
-	}
-	else if (a->head->nbr > a->head->next->nbr && a->head->nbr > a->tail->nbr
-		&& a->tail->nbr < a->head->next->nbr)
-	{
-		printf("cas 3\n");
-		a = lst_rotate(a);
-		printf("ra\n");
-	}
-	else if (a->head->nbr < a->head->next->nbr && a->head->next->nbr > a->tail->nbr
-		&& a->head->nbr < a->tail->nbr)
-	{
-		a = lst_swap(a);
-		printf("sa\n");
-		a = lst_rotate(a);
-		printf("ra\n");
-	}
-	else if (a->head->nbr < a->head->next->nbr && a->head->nbr > a->tail->nbr && a->tail->nbr < a->head->next->nbr)
-	{
-		a = reverse_rotate(a);
-		printf("rra\n");
-	}
-	return (a);
+	b = lst_push(b, a);
+	printf("pa\n");
+	b = lst_push(b, a);
+	printf("pa\n");
+	sort_three(a);
+	a = lst_push(a, b);
+	printf("pb\n");
+	a = lst_rotate(a);
+	printf("ra\n");
+	a = lst_push(a, b);
+	printf("pb\n");
 }
 
 int	main(int ac, char **av)
@@ -100,13 +80,16 @@ int	main(int ac, char **av)
 	t_list	*a;
 	t_list	*b;
 
-	b = create_list();
 	a = create_list();
 	check_arg(a, av, ac);
+	b = create_list();
 	view_lst(a);
 	if (a->size == 3)
 		a = sort_three(a);
+	if (a->size == 5)
+		sort_five(a, b);
 	view_lst(a);
+	delete_all_list(a);
 	free(a);
 	free(b);
 	return (1);
