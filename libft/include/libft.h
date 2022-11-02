@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:57:30 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/31 11:30:29 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/02 15:47:33 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 60
 # endif
+
+# define TRUE 1
+# define FALSE 0
 
 # include <unistd.h>
 # include <stdio.h>
