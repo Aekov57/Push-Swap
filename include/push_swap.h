@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:11:06 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 17:03:23 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 20:38:01 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ra(t_list *a);
 void	rb(t_list *b);
 void	rrb(t_list *b);
 void	rra(t_list *a);
+void	sort_hundred(t_list *a, t_list *b);
 void	sort_five(t_list *a, t_list *b);
 void	min_max_on_top(t_list *a, t_list *b);
 t_list	*insert_node_int(t_list *ptr, size_t position, long data);
@@ -61,14 +62,12 @@ void	double_revrotate(t_list *a, t_list *b);
 void	double_rotate(t_list *a, t_list *b);
 void	delete_all_list(t_list *ptr);
 void	reverse_lst_view(t_list *lst);
-
 long	ft_atol(const char *str);
 void	check_int(char **tab, int i, int i2);
 int		arg_parsing(char *str, int i);
 char	**one_arg(char **tab, char *arg, int check);
 char	*mult_in_one(char **arg, int ac);
 void	check_arg(t_list *a, char **arg, int ac);
-
 void	sort_case(t_list *a, t_list *b);
 void	check_arg(t_list *a, char **arg, int ac);
 void	insert_arg(t_list *a, char **tab);
@@ -80,4 +79,10 @@ void	min_on_top(t_list *a, t_list *b);
 void	sort_hundred(t_list *a, t_list *b);
 t_list	*convert_lstn(t_list *a);
 void	view_lst(t_list *lst);
+void	radix_pw(t_list *a, t_list *b);
+void	convert_alst(t_list *a, t_list *a_conv);
+t_list	*simple_sort(t_list *ptr);
+t_list	*convert_lstn(t_list *a);
+void	sort_hundred(t_list *a, t_list *b);
+
 #endif

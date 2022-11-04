@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort_fct2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 20:38:29 by misimon          ###   ########.fr       */
+/*   Created: 2022/11/04 20:21:51 by misimon           #+#    #+#             */
+/*   Updated: 2022/11/04 20:28:59 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-int	main(int ac, char **av)
+void	ra(t_list *a)
 {
-	t_list	*a;
-	t_list	*b;
+	a = lst_rotate(a);
+	ft_printf("ra\n");
+}
 
-	a = create_list();
-	check_arg(a, av, ac);
-	b = create_list();
-	sort_case(a, b);
-	delete_all_list(a);
-	free(a);
-	free(b);
-	return (1);
+void	rb(t_list *b)
+{
+	b = lst_rotate(b);
+	ft_printf("rb\n");
+}
+
+void	rra(t_list *a)
+{
+	a = reverse_rotate(a);
+	ft_printf("rra\n");
+}
+
+void	rrb(t_list *b)
+{
+	b = reverse_rotate(b);
+	ft_printf("rrb\n");
 }

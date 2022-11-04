@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:54:12 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 19:04:25 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 20:44:23 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_arg(t_list *a, char **arg, int ac)
 
 void	sort_case(t_list *a, t_list *b)
 {
-	t_list *a_conv;
+	t_list	*a_conv;
 
 	if (a->size == 2)
 	{
@@ -71,7 +71,7 @@ void	sort_case(t_list *a, t_list *b)
 	}
 	else if (a->size == 3)
 		a = sort_three(a);
-	else if (a->size > 3  && a->size <= 5)
+	else if (a->size > 3 && a->size <= 5)
 	{
 		if (check_sort(a) != TRUE)
 			sort_five(a, b);
@@ -80,5 +80,7 @@ void	sort_case(t_list *a, t_list *b)
 	{
 		a_conv = convert_lstn(a);
 		sort_hundred(a, b);
+		delete_all_list(a_conv);
+		free(a_conv);
 	}
 }
