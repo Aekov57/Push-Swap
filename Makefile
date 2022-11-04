@@ -6,7 +6,7 @@
 #    By: misimon <misimon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 00:55:09 by misimon           #+#    #+#              #
-#    Updated: 2022/10/28 16:09:35 by misimon          ###   ########.fr        #
+#    Updated: 2022/11/04 14:00:05 by misimon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_DIR	:= 	src
 SRCS	:=	main.c						\
 										\
 			parsing_fct/arg_check.c		\
+			parsing_fct/arg_fct.c		\
 										\
 			linked_lst_fct/lst_fct.c	\
 			linked_lst_fct/lst_fct2.c	\
@@ -25,6 +26,8 @@ SRCS	:=	main.c						\
 										\
 			sort_fct/sort_fct.c			\
 			sort_fct/three_sort_fct.c	\
+			sort_fct/five_sort_fct.c	\
+			sort_fct/sort_utils.c		\
 
 SRCS := 	$(SRCS:%=$(SRC_DIR)/%)
 

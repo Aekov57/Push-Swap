@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:11:06 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/02 17:47:54 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 17:03:23 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	sb(t_list *b);
 void	ss(t_list *a, t_list *b);
 void	pa(t_list *a, t_list *b);
 void	pb(t_list *a, t_list *b);
+void	ra(t_list *a);
+void	rb(t_list *b);
+void	rrb(t_list *b);
+void	rra(t_list *a);
+void	sort_five(t_list *a, t_list *b);
+void	min_max_on_top(t_list *a, t_list *b);
 t_list	*insert_node_int(t_list *ptr, size_t position, long data);
 t_list	*delete_position(t_list *ptr, size_t position);
 t_list	*lst_swap(t_list *ptr);
@@ -63,5 +69,15 @@ char	**one_arg(char **tab, char *arg, int check);
 char	*mult_in_one(char **arg, int ac);
 void	check_arg(t_list *a, char **arg, int ac);
 
+void	sort_case(t_list *a, t_list *b);
+void	check_arg(t_list *a, char **arg, int ac);
+void	insert_arg(t_list *a, char **tab);
+long	ft_atol(const char *str);
+int		check_sort(t_list *a);
+long	check_min(t_list *a);
+long	check_max(t_list *a);
+void	min_on_top(t_list *a, t_list *b);
+void	sort_hundred(t_list *a, t_list *b);
+t_list	*convert_lstn(t_list *a);
 void	view_lst(t_list *lst);
 #endif

@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:31:25 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/28 16:00:50 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 14:50:47 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_int(char **tab, int i, int i2)
 
 int	arg_parsing(char *str, int i)
 {
-	if (!ft_isdigit(str[i]) && str[i] != ' ' && !ft_issign(str[i]))
+	if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '\n' && !ft_issign(str[i]))
 		return (ft_error());
 	if (ft_issign(str[i]) && (!ft_isdigit(str[i + 1])
 			|| ft_isdigit(str[i - 1])))

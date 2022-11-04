@@ -6,133 +6,104 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/02 17:54:44 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 19:07:16 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-long	ft_atol(const char *str)
+t_list	*simple_sort(t_list *ptr)
 {
-	long	result;
-	int		l;
+	t_node	*next;
+	t_node	*actual;
 
-	l = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			l = -1;
-	while (ft_isdigit(*str))
-		result = result * 10 + *str++ - '0';
-	result *= l;
-	return (result);
+	actual = ptr->head;
+	while (!check_sort(ptr) && actual)
+	{
+		next = ptr->head;
+		while (next)
+		{
+			if (actual->nbr < next->nbr)
+			{
+				actual->nbr ^= next->nbr;
+				next->nbr ^= actual->nbr;
+				actual->nbr ^= next->nbr;
+			}
+			next = next->next;
+		}
+		actual = actual->next;
+	}
+	view_lst(ptr);
+	return (ptr);
 }
 
-void	insert_arg(t_list *a, char **tab)
+t_list *convert_lstn(t_list *a)
 {
-	int		i;
-	long	nbr;
+	t_list	*a_conv;
+	t_node	*actual;
+	t_node	*next;
+	size_t	j;
 
-	i = -1;
-	while (tab[++i])
+	a_conv = create_list();
+	actual = a->head;
+	while (actual)
 	{
-		nbr = ft_atol(tab[i]);
-		add_tail_int(a, nbr);
+		add_tail_int(a_conv, actual->nbr);
+		actual = actual->next;
 	}
-}
-
-void	check_arg(t_list *a, char **arg, int ac)
-{
-	char	**tab;
-	long	i;
-
-	i = 0;
-	tab = NULL;
-	if (ac < 2)
-	{
-		free(a);
-		exit(1);
-	}
-	tab = one_arg(tab, mult_in_one(arg, ac), 1);
-	insert_arg(a, tab);
-	free_tab(tab);
-}
-
-int	check_sort(t_list *a)
-{
-	t_node	*node;
-
-	node = a->head;
-	while (node && node->next)
-	{
-		if (node->nbr > node->next->nbr)
-			return (FALSE);
-		node = node->next;
-	}
-	return (TRUE);
-}
-
-long	check_min(t_list *a)
-{
-	t_node	*node;
-	long	min;
-
-	node = a->head;
-	min = node->nbr;
-	while (node && node->next)
-	{
-		if (min > node->next->nbr)
-			min = node->next->nbr;
-		node = node->next;
-	}
-	return (min);
-}
-
-long	check_max(t_list *a)
-{
-	t_node	*node;
-	long	max;
-
-	node = a->head;
-	max = node->nbr;
-	while (node && node->next)
-	{
-		if (max < node->next->nbr)
-			max = node->next->nbr;
-		node = node->next;
-	}
-	return (max);
-}
-
-void	sort_five(t_list *a, t_list *b)
-{
-	if (a->size == 4)
-		pb(a, b);
-	if (a->size == 5)
-	{
-		pb(a, b);
-		pb(a, b);
-	}
-	a = sort_three(a);
-	pa(a, b);
-	if ()
+	a_conv = simple_sort(a_conv);
+	actual = a->head;
 	view_lst(a);
-	view_lst(b);
+	while (actual)
+	{
+		next = a_conv->head;
+		j = 0;
+		while (next)
+		{
+			j++;
+			if (actual->nbr == next->nbr)
+			{
+				actual->nbr = j;
+				break ;
+			}
+			next = next->next;
+		}
+		actual = actual->next;
+	}
+	view_lst(a);
+	return (a);
 }
 
-void sort_case(t_list *a, t_list *b)
+void	sort_hundred(t_list *a, t_list *b)
 {
-	if (a->size == 2)
+	size_t	j;
+	size_t	l;
+
+	l = 0;
+	while (!check_sort(a))
 	{
-		if (a->head->nbr > a->tail->nbr)
-			sa(a);
+		j = a->size;
+		while (j-- && !check_sort(a))
+		{
+			if (!(a->head->nbr >> l & 1))
+				pb(a, b);
+			else
+				ra(a);
+		}
+		j = b->size;
+		l++;
+		while (j-- && !check_sort(a))
+		{
+			if (b->head->nbr >> l & 1)
+				pa(a, b);
+			else
+				rb(b);
+		}
 	}
-	else if (a->size == 3)
-		a = sort_three(a);
-	else if (a->size > 3  && a->size <= 5)
-		sort_five(a, b);
+	while (b->head)
+		pa(a, b);
+	while (!check_sort(a) && a->head->nbr >= 0)
+		ra(a);
 }
 
 int	main(int ac, char **av)
@@ -143,9 +114,7 @@ int	main(int ac, char **av)
 	a = create_list();
 	check_arg(a, av, ac);
 	b = create_list();
-	view_lst(a);
 	sort_case(a, b);
-	view_lst(a);
 	delete_all_list(a);
 	free(a);
 	free(b);

@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:58:07 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/02 17:48:07 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/04 18:33:46 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,49 @@ void	ss(t_list *a, t_list *b)
 	ft_printf("ss\n");
 }
 
-void sa(t_list *a)
+void	sa(t_list *a)
 {
 	a = lst_swap(a);
 	ft_printf("sa\n");
 }
 
-void sb(t_list *b)
+void	sb(t_list *b)
 {
 	b = lst_swap(b);
 	ft_printf("sb\n");
 }
 
-void pa(t_list *a, t_list *b)
+void	pa(t_list *a, t_list *b)
 {
 	a = lst_push(a, b);
 	ft_printf("pa\n");
 }
 
-void pb(t_list *a, t_list *b)
+void	pb(t_list *a, t_list *b)
 {
 	b = lst_push(b, a);
 	ft_printf("pb\n");
+}
+
+void	ra(t_list *a)
+{
+	a = lst_rotate(a);
+	ft_printf("ra\n");
+}
+void	rb(t_list *b)
+{
+	b = lst_rotate(b);
+	ft_printf("rb\n");
+}
+
+void rra(t_list *a)
+{
+	a = reverse_rotate(a);
+	ft_printf("rra\n");
+}
+
+void rrb(t_list *b)
+{
+	b = reverse_rotate(b);
+	ft_printf("rrb\n");
 }
