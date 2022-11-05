@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 20:36:01 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 20:42:50 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/05 01:27:23 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list	*convert_lstn(t_list *a)
 	a_conv = simple_sort(a_conv);
 	convert_alst(a, a_conv);
 	delete_all_list(a_conv);
-	free(a);
+	free(a_conv);
 	return (a);
 }
 
@@ -89,7 +89,7 @@ void	radix_pw(t_list *a, t_list *b)
 	while (!check_sort(a))
 	{
 		j = a->size;
-		while (j-- && !check_sort(a))
+		while (j--)
 		{
 			if (!(a->head->nbr >> l & 1))
 				pb(a, b);
@@ -98,7 +98,7 @@ void	radix_pw(t_list *a, t_list *b)
 		}
 		j = b->size;
 		l++;
-		while (j-- && !check_sort(a))
+		while (j--)
 		{
 			if (b->head->nbr >> l & 1)
 				pa(a, b);
@@ -113,6 +113,8 @@ void	sort_hundred(t_list *a, t_list *b)
 	radix_pw(a, b);
 	while (b->head)
 		pa(a, b);
-	while (!check_sort(a) && a->head->nbr >= 0)
+	while (!check_sort(a))
+	{
 		ra(a);
+	}
 }

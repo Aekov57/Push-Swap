@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:54:12 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 20:44:23 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/05 01:05:21 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	sort_case(t_list *a, t_list *b)
 	else if (a->size > 5 && !check_sort(a))
 	{
 		a_conv = convert_lstn(a);
-		sort_hundred(a, b);
-		delete_all_list(a_conv);
-		free(a_conv);
+		sort_hundred(a_conv, b);
 	}
 }
