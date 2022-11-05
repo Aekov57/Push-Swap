@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 05:19:49 by misimon           #+#    #+#             */
-/*   Updated: 2022/10/19 21:24:26 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/05 16:19:47 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_error(void)
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	return (0);
 }

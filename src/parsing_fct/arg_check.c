@@ -6,20 +6,26 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:31:25 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/04 20:27:51 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/05 17:48:23 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	check_int(char **tab, int i, int i2)
+void	check_int(char **tab, int i, int i2, t_list *a)
 {
 	if (ft_atol(tab[i]) > (long)INT_MAX || ft_atol(tab[i]) < (long)INT_MIN)
+	{
+		free(a);
 		exit(ft_error() + free_tab(tab));
+	}
 	while (tab[++i2])
 	{
 		if (ft_atol(tab[i2]) == ft_atol(tab[i]) && i != i2)
+		{
+			free(a);
 			exit(ft_error() + free_tab(tab));
+		}
 	}
 }
 
@@ -34,7 +40,7 @@ int	arg_parsing(char *str, int i)
 	return (1);
 }
 
-char	**one_arg(char **tab, char *arg, int check)
+char	**one_arg(char **tab, char *arg, int check, t_list *a)
 {
 	int	i;
 
@@ -46,10 +52,13 @@ char	**one_arg(char **tab, char *arg, int check)
 	if (check == 1)
 		free(arg);
 	if (tab == NULL)
+	{
+		free(a);
 		exit(ft_error());
+	}
 	i = -1;
 	while (tab[++i])
-		check_int(tab, i, -1);
+		check_int(tab, i, -1, a);
 	return (tab);
 }
 
