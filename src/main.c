@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:12:31 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/05 00:07:21 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/07 16:57:10 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int	main(int ac, char **av)
 	delete_all_list(a);
 	free(a);
 	free(b);
-	return (1);
+	return (0);
 }

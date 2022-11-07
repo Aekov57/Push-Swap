@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 13:54:12 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/05 17:45:19 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/07 15:51:47 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_arg(t_list *a, char **arg, int ac)
 		free(a);
 		exit(1);
 	}
-	tab = one_arg(tab, mult_in_one(arg, ac), 1, a);
+	tab = one_arg(tab, mult_in_one(arg, ac), a);
 	insert_arg(a, tab);
 	free_tab(tab);
 }

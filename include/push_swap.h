@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:11:06 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/05 17:47:22 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/07 15:53:06 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	delete_all_list(t_list *ptr);
 void	reverse_lst_view(t_list *lst);
 long	ft_atol(const char *str);
 void	check_int(char **tab, int i, int i2, t_list *a);
-int		arg_parsing(char *str, int i);
-char	**one_arg(char **tab, char *arg, int check, t_list *a);
+int		arg_parsing(char *str, int i, t_list *a);
+char	**one_arg(char **tab, char *arg, t_list *a);
 char	*mult_in_one(char **arg, int ac);
 void	check_arg(t_list *a, char **arg, int ac);
 void	sort_case(t_list *a, t_list *b);
