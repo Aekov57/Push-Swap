@@ -6,7 +6,7 @@
 /*   By: misimon <misimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:31:25 by misimon           #+#    #+#             */
-/*   Updated: 2022/11/07 16:44:40 by misimon          ###   ########.fr       */
+/*   Updated: 2022/11/07 17:59:05 by misimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	arg_parsing(char *str, int i, t_list *a)
 		return (ft_error());
 	}
 	if (ft_issign(str[i]) && (!ft_isdigit(str[i + 1])
-			|| ft_isdigit(str[i - 1])))
+			|| (i > 0 && ft_isdigit(str[i - 1]))))
 	{
 		free(a);
 		return (ft_error());
@@ -75,14 +75,14 @@ char	**one_arg(char **tab, char *arg, t_list *a)
 char	*mult_in_one(char **arg, int ac)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	str = ft_calloc(1, sizeof(char));
-	while (++i < ac)
+	while (++i < (size_t)ac)
 	{
 		str = ft_strfjoin(str, arg[i]);
-		if (i + 1 != ac)
+		if (i + 1 != (size_t)ac)
 			str = ft_strfjoin(str, " ");
 	}
 	return (str);
